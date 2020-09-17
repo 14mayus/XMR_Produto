@@ -13,6 +13,7 @@ namespace XMR_Produto.Activities
     {
         EditText edtDescricao, edtPreco, edtQuantidade;
         Button btnCadastrar;
+        TextView txtInfo;
 
         private List<Produto> _produtos = new List<Produto>();
 
@@ -29,7 +30,7 @@ namespace XMR_Produto.Activities
             edtPreco = FindViewById<EditText>(Resource.Id.edtPreco);
             edtQuantidade = FindViewById<EditText>(Resource.Id.edtQuantidade);
             btnCadastrar = FindViewById<Button>(Resource.Id.btnCadastrar);
-
+            txtInfo = FindViewById<TextView>(Resource.Id.txtInfo);
             btnCadastrar.Click += BtnCadastrar_Click;
 
         }
@@ -38,12 +39,15 @@ namespace XMR_Produto.Activities
         {
             Produto novoProduto = new Produto
             {
+                Id = _produtos.Count + 1,
                 Descricao = edtDescricao.Text,
                 Preco = decimal.Parse(edtPreco.Text),
                 Quantidade = int.Parse(edtQuantidade.Text)
             };
 
             _produtos.Add(novoProduto);
+
+            txtInfo.Text = "Produtos cadastrados: " + _produtos.Count;
 
             edtDescricao.Text = "";
             edtPreco.Text = "";
